@@ -10,6 +10,9 @@ import UIKit
 
 class ScribbleViewController: UIViewController {
 
+    // See class reference to UIImageWriteToSavedPhotosAlbum.
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

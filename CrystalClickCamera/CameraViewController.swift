@@ -47,7 +47,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         imagePick.delegate = self
         imagePick.showsCameraControls = true
         
+//        self.CameraDisplayView.addSubview(imagePick.view)
         self.view.addSubview(imagePick.view)
+        
 //        imagePick.view.bounds.width == screenWidth
 //        imagePick.view.bounds.height == screenHeight
         
@@ -98,9 +100,14 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         var newPhoto = info[UIImagePickerControllerOriginalImage] as? UIImage
 
         photoCollection.insert(newPhoto!, atIndex: 0)
+        println(photoCollection.count)
         
-        storyboard?.instantiateViewControllerWithIdentifier("photoCollectionVC") as! PhotoCollectionViewController
+        println("Image picker controller button pressed.")
+
         
+        storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
+        
+        self.navigationController?.presentViewController(ScribbleViewController(), animated: true, completion: nil)
         
         
     }
@@ -108,6 +115,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         
         picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        println("Back button pressed.")
+        
         
     }
     
