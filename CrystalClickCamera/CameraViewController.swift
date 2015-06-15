@@ -47,13 +47,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         imagePick.delegate = self
         imagePick.showsCameraControls = true
         
-//        self.CameraDisplayView.addSubview(imagePick.view)
         self.view.addSubview(imagePick.view)
         
-//        imagePick.view.bounds.width == screenWidth
-//        imagePick.view.bounds.height == screenHeight
-        
-        let buttonSize: Int = 80
         
     }
 
@@ -97,17 +92,15 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
-        var newPhoto = info[UIImagePickerControllerOriginalImage] as? UIImage
-
-        photoCollection.insert(newPhoto!, atIndex: 0)
-        println(photoCollection.count)
+        var chosenPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        println("Image picker controller button pressed.")
-
+        let scribbleVC = storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
         
-        storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
+        self.navigationController?.pushViewController(scribbleVC, animated: true)
         
-        self.navigationController?.presentViewController(ScribbleViewController(), animated: true, completion: nil)
+        scribbleVC.myImage = chosenPhoto
+        
+        dismissViewControllerAnimated(true, completion: nil)
         
         
     }

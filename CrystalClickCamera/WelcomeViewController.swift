@@ -8,10 +8,26 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
+var theChosenPhoto: UIImage?
 
+class WelcomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+    let imagePick = UIImagePickerController()
+    
+    @IBAction func choosePictureButton(sender: AnyObject) {
+        
+        imagePick.allowsEditing = false
+        imagePick.sourceType = .PhotoLibrary
+        presentViewController(imagePick, animated: true, completion: nil)
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        imagePick.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -21,7 +37,28 @@ class WelcomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        var chosenPhoto = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        let scribbleVC = storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
+        
+        self.navigationController?.pushViewController(scribbleVC, animated: true)
+        
+        scribbleVC.myImage = chosenPhoto
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        
+        
+        
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

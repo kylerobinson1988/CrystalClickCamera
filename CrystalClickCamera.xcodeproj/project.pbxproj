@@ -14,11 +14,8 @@
 		9147A7001B2C697B00D21AC8 /* CrystalClickCameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A6FF1B2C697B00D21AC8 /* CrystalClickCameraTests.swift */; };
 		9147A70A1B2C6CE400D21AC8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7091B2C6CE400D21AC8 /* CameraViewController.swift */; };
 		9147A70C1B2C741100D21AC8 /* CameraButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A70B1B2C741100D21AC8 /* CameraButtons.swift */; };
-		9147A70E1B2C8C1100D21AC8 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A70D1B2C8C1100D21AC8 /* PhotoCollectionViewCell.swift */; };
 		9147A7101B2C8D4600D21AC8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A70F1B2C8D4600D21AC8 /* WelcomeViewController.swift */; };
 		9147A7121B2C91A400D21AC8 /* ScribbleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */; };
-		9147A7141B2CACEE00D21AC8 /* CameraDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7131B2CACEE00D21AC8 /* CameraDisplayView.swift */; };
-		9147A7181B2CB58300D21AC8 /* PhotoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7171B2CB58300D21AC8 /* PhotoCollectionViewController.swift */; };
 		9147A71A1B2CBAB900D21AC8 /* ScribbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,11 +41,8 @@
 		9147A6FF1B2C697B00D21AC8 /* CrystalClickCameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrystalClickCameraTests.swift; sourceTree = "<group>"; };
 		9147A7091B2C6CE400D21AC8 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		9147A70B1B2C741100D21AC8 /* CameraButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraButtons.swift; sourceTree = "<group>"; };
-		9147A70D1B2C8C1100D21AC8 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		9147A70F1B2C8D4600D21AC8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScribbleViewController.swift; sourceTree = "<group>"; };
-		9147A7131B2CACEE00D21AC8 /* CameraDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraDisplayView.swift; sourceTree = "<group>"; };
-		9147A7171B2CB58300D21AC8 /* PhotoCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewController.swift; sourceTree = "<group>"; };
 		9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScribbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,12 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				9147A6ED1B2C697B00D21AC8 /* Main.storyboard */,
-				9147A7131B2CACEE00D21AC8 /* CameraDisplayView.swift */,
 				9147A70F1B2C8D4600D21AC8 /* WelcomeViewController.swift */,
 				9147A7091B2C6CE400D21AC8 /* CameraViewController.swift */,
 				9147A70B1B2C741100D21AC8 /* CameraButtons.swift */,
-				9147A7171B2CB58300D21AC8 /* PhotoCollectionViewController.swift */,
-				9147A70D1B2C8C1100D21AC8 /* PhotoCollectionViewCell.swift */,
 				9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */,
 				9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */,
 				9147A6E71B2C697B00D21AC8 /* Supporting Files */,
@@ -233,15 +224,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9147A70E1B2C8C1100D21AC8 /* PhotoCollectionViewCell.swift in Sources */,
 				9147A7121B2C91A400D21AC8 /* ScribbleViewController.swift in Sources */,
 				9147A6EA1B2C697B00D21AC8 /* AppDelegate.swift in Sources */,
-				9147A7141B2CACEE00D21AC8 /* CameraDisplayView.swift in Sources */,
 				9147A7101B2C8D4600D21AC8 /* WelcomeViewController.swift in Sources */,
 				9147A71A1B2CBAB900D21AC8 /* ScribbleView.swift in Sources */,
 				9147A70C1B2C741100D21AC8 /* CameraButtons.swift in Sources */,
 				9147A70A1B2C6CE400D21AC8 /* CameraViewController.swift in Sources */,
-				9147A7181B2CB58300D21AC8 /* PhotoCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
