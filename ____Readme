@@ -1,0 +1,5 @@
+#Crystal Click Camera
+
+This is my own personal project where you take a picture (or choose one from the libary) using UIImagePicker.  It's written in Swift.
+
+After you take a picture, you can scribble on it and save the result.  You can adjust the stroke to one of several colors and also adjust line thickness.  

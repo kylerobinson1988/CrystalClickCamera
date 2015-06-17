@@ -12,6 +12,11 @@ class ScribbleViewController: UIViewController {
 
     var myImage: UIImage?
     
+    @IBOutlet weak var colorCollection: UICollectionView!
+    
+    
+    @IBOutlet weak var scribblePad: ScribbleView!
+    
     @IBAction func backButtonPress(sender: AnyObject) {
 
         
@@ -30,9 +35,22 @@ class ScribbleViewController: UIViewController {
     
     @IBAction func undoButtonPress(sender: AnyObject) {
         
-        
+        if scribblePad.scribbles.count > 0 {
+            
+            var removedLine = scribblePad.scribbles.removeLast()
+            scribblePad.setNeedsDisplay()
+            
+        }
         
     }
+    
+    @IBAction func clearPress(sender: AnyObject) {
+        
+        scribblePad.scribbles = []
+        scribblePad.setNeedsDisplay()
+        
+    }
+    
     
     @IBOutlet weak var panelViewBottomConstraint: NSLayoutConstraint!
     
@@ -49,7 +67,12 @@ class ScribbleViewController: UIViewController {
         UIColor.purpleColor()
     ]
     
-    
+    @IBAction func lineThickness(sender: UISlider) {
+        
+        var sliderSetting = sender.value
+        publicSliderSetting = Double(sliderSetting)
+        
+    }
     
     
     @IBOutlet weak var photoImage: UIImageView!
@@ -82,6 +105,15 @@ class ScribbleViewController: UIViewController {
         
     }
 
+    @IBAction func colorSelectPress(sender: UIButton) {
+        
+        if let color = sender.backgroundColor {
+            
+            scribblePad.currentColor = color
+            
+        }
+        
+    }
     
     
 

@@ -46,6 +46,8 @@ class WelcomeViewController: UIViewController, UINavigationControllerDelegate, U
         
         self.navigationController?.pushViewController(scribbleVC, animated: true)
         
+        println(self.navigationController?.viewControllers)
+        
         scribbleVC.myImage = chosenPhoto
         
         dismissViewControllerAnimated(true, completion: nil)

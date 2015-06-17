@@ -45,7 +45,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
 
         imagePick.sourceType = UIImagePickerControllerSourceType.Camera
         imagePick.delegate = self
-        imagePick.showsCameraControls = true
+        imagePick.showsCameraControls = false
+        
+        // find black bar property and disable it?
+        
+        imagePick.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 200)
         
         self.view.addSubview(imagePick.view)
         
