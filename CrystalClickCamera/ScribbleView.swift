@@ -27,14 +27,16 @@ class ScribbleView: UIView {
             
             if let firstPoint = scribble.points.first {
                 
-                CGContextMoveToPoint(context, firstPoint.x, firstPoint.y)
-                
-                for point in scribble.points {
+                    scribble.strokeColor?.set()
                     
-                    CGContextSetLineWidth(context, CGFloat(scribble.strokeSize))
-                    CGContextAddLineToPoint(context, point.x, point.y)
+                    CGContextMoveToPoint(context, firstPoint.x, firstPoint.y)
                     
-                }
+                    for point in scribble.points {
+                        
+                        CGContextSetLineWidth(context, CGFloat(scribble.strokeSize))
+                        CGContextAddLineToPoint(context, point.x, point.y)
+                    
+                    }
                 
                 CGContextStrokePath(context)
                 
@@ -50,6 +52,7 @@ class ScribbleView: UIView {
         var scribble = Scribble()
         scribble.points = [point, point]
         
+        scribble.strokeColor = currentColor
         scribble.strokeSize = publicSliderSetting
         
         scribbles.append(scribble)
@@ -68,6 +71,17 @@ class ScribbleView: UIView {
             
         }
         
+        
+    }
+    
+    func addPointToCurrentScribble(point: CGPoint) {
+        
+        if scribbles.count > 0 {
+            
+            scribbles[scribbles.count - 1].points.append(point)
+            setNeedsDisplay()
+            
+        }
         
     }
     

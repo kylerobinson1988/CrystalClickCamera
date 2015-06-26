@@ -28,6 +28,8 @@ class WelcomeViewController: UIViewController, UINavigationControllerDelegate, U
         super.viewDidLoad()
         
         imagePick.delegate = self
+        
+        
 
         // Do any additional setup after loading the view.
     }
@@ -55,7 +57,8 @@ class WelcomeViewController: UIViewController, UINavigationControllerDelegate, U
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         
-        
+        dismissViewControllerAnimated(true, completion: nil)
+
         
     }
     

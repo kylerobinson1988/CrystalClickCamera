@@ -17,6 +17,8 @@
 		9147A7101B2C8D4600D21AC8 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A70F1B2C8D4600D21AC8 /* WelcomeViewController.swift */; };
 		9147A7121B2C91A400D21AC8 /* ScribbleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */; };
 		9147A71A1B2CBAB900D21AC8 /* ScribbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */; };
+		918285AB1B3C94F2003A3E0D /* ColorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918285AA1B3C94F2003A3E0D /* ColorCollectionView.swift */; };
+		918285AD1B3C9B12003A3E0D /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918285AC1B3C9B12003A3E0D /* ColorCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		9147A70F1B2C8D4600D21AC8 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScribbleViewController.swift; sourceTree = "<group>"; };
 		9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScribbleView.swift; sourceTree = "<group>"; };
+		918285AA1B3C94F2003A3E0D /* ColorCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionView.swift; sourceTree = "<group>"; };
+		918285AC1B3C9B12003A3E0D /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 				9147A70B1B2C741100D21AC8 /* CameraButtons.swift */,
 				9147A7191B2CBAB900D21AC8 /* ScribbleView.swift */,
 				9147A7111B2C91A400D21AC8 /* ScribbleViewController.swift */,
+				918285AA1B3C94F2003A3E0D /* ColorCollectionView.swift */,
+				918285AC1B3C9B12003A3E0D /* ColorCell.swift */,
 				9147A6E71B2C697B00D21AC8 /* Supporting Files */,
 			);
 			path = CrystalClickCamera;
@@ -225,8 +231,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9147A7121B2C91A400D21AC8 /* ScribbleViewController.swift in Sources */,
+				918285AD1B3C9B12003A3E0D /* ColorCell.swift in Sources */,
 				9147A6EA1B2C697B00D21AC8 /* AppDelegate.swift in Sources */,
 				9147A7101B2C8D4600D21AC8 /* WelcomeViewController.swift in Sources */,
+				918285AB1B3C94F2003A3E0D /* ColorCollectionView.swift in Sources */,
 				9147A71A1B2CBAB900D21AC8 /* ScribbleView.swift in Sources */,
 				9147A70C1B2C741100D21AC8 /* CameraButtons.swift in Sources */,
 				9147A70A1B2C6CE400D21AC8 /* CameraViewController.swift in Sources */,

@@ -45,11 +45,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
 
         imagePick.sourceType = UIImagePickerControllerSourceType.Camera
         imagePick.delegate = self
-        imagePick.showsCameraControls = false
+        imagePick.showsCameraControls = true
         
         // find black bar property and disable it?
         
-        imagePick.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 200)
+//        imagePick.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 180)
         
         self.view.addSubview(imagePick.view)
         
@@ -73,22 +73,23 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     func takePhoto() {
         
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-            
-            
+//        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+//            
+//            
+//        
+//        imagePick.allowsEditing = false
+//        imagePick.sourceType = UIImagePickerControllerSourceType.Camera
+//        imagePick.cameraCaptureMode = .Photo
+//            
+//            println("Camera is working A-OK.")
+//        
+//        } else {
+//            
+//            println("No camera available.")
+//            
+//        }
         
-        imagePick.allowsEditing = false
-        imagePick.sourceType = UIImagePickerControllerSourceType.Camera
-        imagePick.cameraCaptureMode = .Photo
-            
-            println("Camera is working A-OK.")
-        
-        } else {
-            
-            println("No camera available.")
-            
-        }
-        
+//        imagePickerController(imagePick, didFinishPickingMediaWithInfo: [NSObject : AnyObject].self)
     }
     
 
@@ -116,7 +117,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         self.navigationController?.popToRootViewControllerAnimated(true)
         println("Back button pressed.")
         
-        
+
     }
     
     
