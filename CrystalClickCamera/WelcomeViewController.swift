@@ -18,10 +18,24 @@ class WelcomeViewController: UIViewController, UINavigationControllerDelegate, U
         
         imagePick.allowsEditing = false
         imagePick.sourceType = .PhotoLibrary
+        
         presentViewController(imagePick, animated: true, completion: nil)
+        
+//        let scribbleViewVC = storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
+//        
+//        self.navigationController?.pushViewController(scribbleViewVC, animated: true)
+//        
+//        
         
     }
     
+    @IBAction func blankScribbleButton(sender: AnyObject) {
+        
+        let scribbleViewVC = storyboard?.instantiateViewControllerWithIdentifier("scribbleViewVC") as! ScribbleViewController
+        
+        self.navigationController?.pushViewController(scribbleViewVC, animated: true)
+        
+    }
     
     
     override func viewDidLoad() {

@@ -10,6 +10,8 @@ import UIKit
 
 var publicSliderSetting = 0.0
 
+// Take a Selfie, scale image, create context with size, draw image inside 
+// Look for scale function.
 
 class ScribbleView: UIView {
 

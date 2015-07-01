@@ -1,0 +1,5 @@
+target 'CrystalClickCamera' do
+pod 'AFAmazonS3Manager', '~> 2.0'
+pod 'AmazonS3RequestManager', '~> 0.5'
+
+end

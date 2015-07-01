@@ -14,7 +14,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     @IBOutlet weak var mainButtonOutlet: MainButton!
     @IBOutlet weak var flipButtonOutlet: FlipButton!
-    
+        
     @IBAction func mainButtonClick(sender: AnyObject) {
         
         takePhoto()
@@ -47,9 +47,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         imagePick.delegate = self
         imagePick.showsCameraControls = true
         
+        
+        
+//        imagePick.view.frame = CGRectMake(0, 0, screenWidth, screenHeight)
+
+        
         // find black bar property and disable it?
         
-//        imagePick.view.frame = CGRectMake(0, 0, screenWidth, screenHeight - 180)
         
         self.view.addSubview(imagePick.view)
         
