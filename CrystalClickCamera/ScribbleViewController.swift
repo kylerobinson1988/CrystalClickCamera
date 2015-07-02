@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
     // This is the image loaded in from the camera or photo library.
     var myImage: UIImage?
     
@@ -37,29 +39,36 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var selectorSwitch: UISegmentedControl!
     
     @IBAction func selectorPress(sender: UISegmentedControl) {
-    
-        switch sender.selectedSegmentIndex {
-            
-            case 0:
-            
-            trueScribbleFalsePicture = true;
-            scribblePad.setNeedsDisplay()
-            
-            case 1:
-            
-            trueScribbleFalsePicture = false;
-            scribblePad.setNeedsDisplay()
-            
-            default:
-            
-            break;
-            
-        }
+        
+        
+        trueScribbleFalsePicture = sender.selectedSegmentIndex == 0 ? true : false
+        scribblePad.setNeedsDisplay()
+        
+        if !trueScribbleFalsePicture { fetchImages() }
+        
+        //        switch sender.selectedSegmentIndex {
+        //
+        //            case 0:
+        //
+        //            trueScribbleFalsePicture = true;
+        //            scribblePad.setNeedsDisplay()
+        //
+        //            case 1:
+        //
+        //            trueScribbleFalsePicture = false;
+        //            scribblePad.setNeedsDisplay()
+        //            fetchImages()
+        //
+        //            default:
+        //
+        //            break;
+        //
+        //        }
         
     }
     
     @IBAction func backButtonPress(sender: AnyObject) {
-
+        
         navigationController?.popToRootViewControllerAnimated(true)
         
     }
@@ -93,10 +102,10 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             
         } else {
             
-            if pictureItems.count > 0 {
+            if pictureItems != [] {
                 
-                var removedItem = pictureItems.removeLast()
-                scribblePad.setNeedsDisplay()
+                pictureItems.last?.removeFromSuperview()
+                pictureItems.removeLast()
                 
             }
             
@@ -156,8 +165,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             UIGraphicsBeginImageContext(size)
             image.drawInRect(CGRectMake(scaleImageRect.size.width - size.width, size.height - (scaleImageRect.size.height * 1.25), scaleImageRect.width / 2, scaleImageRect.height / 2))
             
-//            image.drawInRect(CGRectMake(<#x: CGFloat#>, <#y: CGFloat#>, <#width: CGFloat#>, <#height: CGFloat#>))
-
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
@@ -178,20 +185,24 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             
             scribblePad.backgroundColor = UIColor.blackColor()
             resizeImage(myImage!, withSize: CGSizeMake(UIScreen.mainScreen().bounds.width * 2, UIScreen.mainScreen().bounds.height * 2))
-
+            
         }
         
         panelViewBottomConstraint.constant = -200
         
         scribblePad.currentColor = UIColor.blackColor()
         publicSliderSetting = 2
-
+        
         colorCollection.dataSource = self
         colorCollection.delegate = self
         
+        var pinchGesture = UIPinchGestureRecognizer(target: self, action: "resizeItem:")
+        view.addGestureRecognizer(pinchGesture)
+        
+        println(imageAssetsArray)
         
     }
-
+    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         
         if trueScribbleFalsePicture == true {
@@ -201,9 +212,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
                 let location = touch.locationInView(scribblePad)
                 
                 scribblePad.newScribbleWithStartPoint(location)
-                
-                //            println(scribblePad.scribbles)
-                //            println(scribblePad.scribbles.count)
                 
             }
             
@@ -219,8 +227,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             
         }
         
-        
-        
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -231,8 +237,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
                 
                 let location = touch.locationInView(scribblePad)
                 scribblePad.addPointToCurrentScribble(location)
-                
-                //            println(scribblePad.scribbles)
                 
             }
             
@@ -258,8 +262,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             
         }
         
-        
-        
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -268,30 +270,22 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
         
         if trueScribbleFalsePicture == true {
             
-            if let color = cell.itemView.backgroundColor {
-                
-                scribblePad.currentColor = color
-                println("The color should've changed.")
-                
-            } else {
-                
-                if let selectedCell = cell.itemView {
-                    
-                    // This following line might need to be changed back.
-                    currentItem = UIImageView(frame: CGRectMake(0, 0, 200, 200))
-                    currentItem?.contentMode = .ScaleAspectFit
-                    currentItem!.image = UIImage(named: "\(indexPath.row)")
-                    currentItem!.center = view.center
-                    
-                    scribblePad.addSubview(currentItem!)
-                    pictureItems.append(currentItem!)
-                    
-                    //Check this line.
-//                    currentItem = currentItem!
-                    
-                }
-                
-            }
+            let color = cell.itemView.backgroundColor
+            
+            scribblePad.currentColor = color!
+            
+        } else {
+            
+            let selectedCell = cell.itemView
+            
+            // This following line might need to be changed back.
+            currentItem = UIImageView(frame: CGRectMake(0, 0, 200, 200))
+            currentItem?.contentMode = .ScaleAspectFit
+            currentItem!.image = imageAssetsArray[indexPath.row]
+            currentItem!.center = view.center
+            
+            scribblePad.addSubview(currentItem!)
+            pictureItems.append(currentItem!)
             
         }
         
@@ -303,6 +297,7 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
         
         if trueScribbleFalsePicture {
             
+            cell.itemView.image == nil
             cell.itemView.backgroundColor = scribbleColors[indexPath.row]
             
             return cell
@@ -310,6 +305,7 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
         } else {
             
             cell.itemView.image = imageAssetsArray[indexPath.row]
+            cell.itemView.backgroundColor = UIColor.clearColor()
             
             return cell
             
@@ -325,6 +321,7 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
             
         } else {
             
+            println(imageAssetsArray.count)
             return imageAssetsArray.count
             
         }
@@ -333,16 +330,19 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func resizeItem(gr: UIPinchGestureRecognizer) {
         
-        if let currentItem = currentItem {
+        if trueScribbleFalsePicture == false {
             
-            let width = currentItem.frame.width
-            let height = currentItem.frame.height
-            
-            currentItem.frame.size.height = height + gr.velocity
-            currentItem.frame.size.width = width + gr.velocity
+            if let currentItem = currentItem {
+                
+                let width = currentItem.frame.width
+                let height = currentItem.frame.height
+                
+                currentItem.frame.size.height = height + gr.velocity
+                currentItem.frame.size.width = width + gr.velocity
+                
+            }
             
         }
-        
         
     }
     
@@ -360,11 +360,6 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // Button that shows or hides the color/itme control panel.
     @IBAction func colorButtonPress(sender: AnyObject) {
         
@@ -374,90 +369,87 @@ class ScribbleViewController: UIViewController, UICollectionViewDataSource, UICo
         
     }
     
-    func fetchImagefromS3(image: UIImage) {
+    func fetchImages() {
         
-        s3Manager.requestSerializer.bucket = bucket
-        s3Manager.requestSerializer.region = AFAmazonS3USStandardRegion
-        //                s3Manager.requestSerializer.setValue("public-read", forHTTPHeaderField: "x-amz-acl")
+        colorCollection.reloadData()
         
-//        let username = RailsRequest.session().username
+        var query = PFQuery(className: "images")
         
-        
-//        let imageName = 
-        
-//        let imageData = UIImagePNGRepresentation(image)
-        
-        let amazonS3Manager = AmazonS3RequestManager(bucket: myAmazonS3Bucket,
-            region: .USStandard,
-            accessKey: accessKey,
-            secret: secret)
-        
-        if let documentPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first as? String {
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             
-            println(imageName)
-            
-            let filePath = documentPath.stringByAppendingPathComponent(imageName + ".png")
-            
-            println(filePath)
-            
-            imageData.writeToFile(filePath, atomically: false)
-            
-            let fileURL = NSURL(fileURLWithPath: filePath)
-            
-            s3Manager.putObjectWithFile(filePath, destinationPath: imageName + ".png", parameters: nil, progress: { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) -> Void in
+            if error == nil {
                 
-                let percentageWritten = (CGFloat(totalBytesWritten) / CGFloat(totalBytesExpectedToWrite) * 100.0)
+                println("No errors in fetching images.")
                 
-                println("Uploaded \(percentageWritten)%")
-                
-                }, success: { (responseObject) -> Void in
+                if let objects = objects as? [PFObject] {
                     
-                    let info = responseObject as! AFAmazonS3ResponseObject
+                    println("Objects: \(objects)")
                     
-                    self.newURL = info.URL.absoluteString
-                    
-                    RailsRequest.session().postImage(self.newURL, answer: self.captionTextField.text, completion: { () -> Void in
+                    for item in objects {
                         
+                        // Make URL request for each item
+                        if let url = NSURL(string: item["url"] as! String) {
+                            
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                                
+                                if let imageData = NSData(contentsOfURL: url) {
+                                    
+                                    let image = UIImage(data: imageData)
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                        
+                                        self.imageAssetsArray.append(image!)
+                                        self.colorCollection.reloadData()
+                                        
+                                    })
+                                    
+                                }
+                                
+                                
+                            })
+
+                        }
                         
-                    })
+                    }
                     
-                    println("\(responseObject)")
+                } else {
                     
-                }, failure: { (error) -> Void in
+                    println("Error: \(error)")
                     
-                    println("\(error)")
-                    
-            })
+                }
+                
+            }
             
         }
-
-}
-
+        
+    }
     
-// The colors I've pre-set for use in the app.
-let scribbleColors: [UIColor] = [
-
-    UIColor(red:0, green:0, blue:0, alpha:1),
-    UIColor(red:0.9, green:0.93, blue:0.88, alpha:1),
-    UIColor(red:0.91, green:0, blue:0.05, alpha:1),
-    UIColor(red:0.78, green:0.11, blue:0.01, alpha:1),
-    UIColor(red:0.98, green:0.3, blue:0.31, alpha:1),
-    UIColor(red:0.98, green:0.49, blue:0, alpha:1),
-    UIColor(red:0.74, green:0.41, blue:0.09, alpha:1),
-    UIColor(red:0.95, green:0.61, blue:0.38, alpha:1),
-    UIColor(red:0.92, green:0.84, blue:0, alpha:1),
-    UIColor(red:0.97, green:0.8, blue:0.1, alpha:1),
-    UIColor(red:0.95, green:0.97, blue:0.35, alpha:1),
-    UIColor(red:0, green:0.65, blue:0.06, alpha:1),
-    UIColor(red:0.27, green:0.74, blue:0.31, alpha:1),
-    UIColor(red:0.37, green:0.97, blue:0.67, alpha:1),
-    UIColor(red:0.01, green:0.12, blue:0.88, alpha:1),
-    UIColor(red:0.53, green:0.7, blue:0.95, alpha:1),
-    UIColor(red:0.42, green:0.88, blue:0.93, alpha:1),
-    UIColor(red:0.63, green:0.36, blue:0.93, alpha:1),
-    UIColor(red:0.91, green:0.06, blue:0.93, alpha:1),
-    UIColor(red:0.93, green:0.69, blue:0.92, alpha:1),
-
+}
+    
+    // The colors I've pre-set for use in the app.
+    let scribbleColors: [UIColor] = [
+        
+        UIColor(red:0, green:0, blue:0, alpha:1),
+        UIColor(red:0.9, green:0.93, blue:0.88, alpha:1),
+        UIColor(red:0.91, green:0, blue:0.05, alpha:1),
+        UIColor(red:0.78, green:0.11, blue:0.01, alpha:1),
+        UIColor(red:0.98, green:0.3, blue:0.31, alpha:1),
+        UIColor(red:0.98, green:0.49, blue:0, alpha:1),
+        UIColor(red:0.74, green:0.41, blue:0.09, alpha:1),
+        UIColor(red:0.95, green:0.61, blue:0.38, alpha:1),
+        UIColor(red:0.92, green:0.84, blue:0, alpha:1),
+        UIColor(red:0.97, green:0.8, blue:0.1, alpha:1),
+        UIColor(red:0.95, green:0.97, blue:0.35, alpha:1),
+        UIColor(red:0, green:0.65, blue:0.06, alpha:1),
+        UIColor(red:0.27, green:0.74, blue:0.31, alpha:1),
+        UIColor(red:0.37, green:0.97, blue:0.67, alpha:1),
+        UIColor(red:0.01, green:0.12, blue:0.88, alpha:1),
+        UIColor(red:0.53, green:0.7, blue:0.95, alpha:1),
+        UIColor(red:0.42, green:0.88, blue:0.93, alpha:1),
+        UIColor(red:0.63, green:0.36, blue:0.93, alpha:1),
+        UIColor(red:0.91, green:0.06, blue:0.93, alpha:1),
+        UIColor(red:0.93, green:0.69, blue:0.92, alpha:1),
+        
 ]
 
 
